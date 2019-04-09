@@ -22,7 +22,7 @@ public class HelloWorldController {
     }
 
     //Step 3: String manipulation into actual data
-    @RequestMapping("quicksort")
+    @RequestMapping("/quicksort")
     public String quicksortify(@RequestParam(value = "array") String array) {
         String[] items = array.split(",");
         int[] parsed = new int[items.length];
@@ -41,7 +41,7 @@ public class HelloWorldController {
         array, and places all smaller (smaller than pivot)
        to left of pivot and all greater elements to right
        of pivot */
-    int partition (int arr[], int low, int high)
+    public int partition (int arr[], int low, int high)
     {
         int pivot = arr[high];    // pivot
         int i = (low - 1);  // Index of smaller element
@@ -64,7 +64,7 @@ public class HelloWorldController {
      arr[] --> Array to be sorted,
       low  --> Starting index,
       high  --> Ending index */
-    void quickSort(int arr[], int low, int high)
+    public void quickSort(int arr[], int low, int high)
     {
         if (low < high)
         {
@@ -83,5 +83,23 @@ public class HelloWorldController {
         int hold = array[a];
         array[a] = array[b];
         array[b] = hold;
+    }
+
+    @RequestMapping("/fib")
+    public String fib(@RequestParam(value = "n") String number) {
+        int n = Integer.parseInt(number);
+        return fibonacci(n) + "";
+    }
+
+    /*
+    Recursive fibonacci function. Calculates the Nth place of the fibonacci formula
+     */
+    private static int fibonacci(int n)  {
+        if(n == 0)
+            return 0;
+        else if(n == 1)
+            return 1;
+        else
+            return fibonacci(n - 1) + fibonacci(n - 2);
     }
 }
